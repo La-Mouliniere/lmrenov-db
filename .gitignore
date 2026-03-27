@@ -1,0 +1,56 @@
+# Python cache
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# Virtual environment
+venv/
+.env/
+.venv/
+
+# Environment variables
+.env
+.env.*
+*.env
+
+# Logs
+*.log
+
+# VSCode / IDE
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# MongoDB data (IMPORTANT 🚨)
+mongo-data/
+
+# Docker
+*.pid
+*.sock
+
+# Test / coverage
+.coverage
+htmlcov/
+.pytest_cache/
+
+# Mypy / type checking
+.mypy_cache/
+
+# Build / dist
+build/
+dist/
+*.egg-info/
+
+# Jupyter (if you ever use it)
+.ipynb_checkpoints/
+
+# Uvicorn
+*.reload
+
+# Misc
+*.swp
+*.swo
