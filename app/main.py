@@ -48,6 +48,17 @@ def read_root():
 # --------------------------
 # Collection endpoints
 # --------------------------
+@app.get("/collections", dependencies=[Depends(verify_token)], tags=["Collections"])
+def get_collections():
+    """
+    Returns the list of all collection names in the database.
+    """
+    try:
+        collections = db.list_collection_names()
+        return {"collections": collections}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Failed to list collections: {str(e)}")
+
 @app.post("/collections/{collection_name}", dependencies=[Depends(verify_token)])
 def create_collection(collection_name: str):
     if collection_name in db.list_collection_names():
@@ -114,11 +125,11 @@ def delete_document(collection_name: str, doc_id: str):
 def get_document(collection_name: str, doc_id: str):
     if collection_name not in db.list_collection_names():
         raise HTTPException(status_code=404, detail="Collection not found")
-    try:
-        obj_id = ObjectId(doc_id)
-    except Exception:
-        raise HTTPException(status_code=400, detail="Invalid document ID format")
-    doc = db[collection_name].find_one({"_id": obj_id})
+    # try:
+    #     obj_id = ObjectId(doc_id)
+    # except Exception:
+    #     raise HTTPException(status_code=400, detail="Invalid document ID format")
+    doc = db[collection_name].find_one({"id": doc_id})
     if not doc:
         raise HTTPException(status_code=404, detail="Document not found")
     doc["_id"] = str(doc["_id"])
