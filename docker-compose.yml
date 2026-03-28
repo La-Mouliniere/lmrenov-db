@@ -1,6 +1,7 @@
 services:
   mongo:
     image: mongo
+    command: ["mongod", "--port", "9442"]
     restart: unless-stopped
     env_file: stack.env
     volumes:
@@ -16,6 +17,15 @@ services:
       - mongo
     ports:
       - "9441:8000"
+
+  # mongo-express:
+  #   image: mongo-express
+  #   restart: always
+  #   env_file: mongo-express.env
+  #   depends_on:
+  #     - mongo
+  #   ports:
+  #     - 8081:8081
 
 volumes:
   didjo_mongo_db:
