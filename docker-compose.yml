@@ -4,7 +4,7 @@ services:
     restart: unless-stopped
     env_file: stack.env
     volumes:
-      - mongo_data:/data/db
+      - didjo_mongo_db:/data/db
 
   fastapi-service:
     build:
@@ -18,4 +18,4 @@ services:
       - "9441:8000"
 
 volumes:
-  mongo_data:
+  didjo_mongo_db:
